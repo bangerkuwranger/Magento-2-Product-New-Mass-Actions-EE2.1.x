@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<listingToolbar name="listing_top">
+		<!-- add mass action -->
+		<massaction name="listing_massaction">
+			<action name="set_to_new">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">set_to_new</item>
+						<item name="label" xsi:type="string" translate="true">Set Product as New</item>
+						<item name="url" xsi:type="string">productnewmassactions/setnew/settonew</item>
+					</item>
+				</argument>
+			</action>
+		</massaction>
+		<!-- add mass action -->
+		<massaction name="listing_massaction">
+			<action name="set_to_not_new">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">set_to_not_new</item>
+						<item name="label" xsi:type="string" translate="true">Set Product as Not New</item>
+						<item name="url" xsi:type="string">productnewmassactions/setnew/settonotnew</item>
+					</item>
+				</argument>
+			</action>
+		</massaction>
+	</listingToolbar>
+</listing>
