@@ -4,26 +4,29 @@
 	<listingToolbar name="listing_top">
 		<!-- add mass action -->
 		<massaction name="listing_massaction">
-			<action name="set_to_new">
+			<action name="settonew">
 				<argument name="data" xsi:type="array">
 					<item name="config" xsi:type="array">
-						<item name="type" xsi:type="string">set_to_new</item>
-						<item name="label" xsi:type="string" translate="true">Set Product as New</item>
-						<item name="url" xsi:type="string">productnewmassactions/setnew/settonew</item>
+						<item name="type" xsi:type="string">settonew</item>
+						<item name="label" xsi:type="string" translate="true">Set Product New Status</item>
 					</item>
 				</argument>
-			</action>
-		</massaction>
-		<!-- add mass action -->
-		<massaction name="listing_massaction">
-			<action name="set_to_not_new">
-				<argument name="data" xsi:type="array">
-					<item name="config" xsi:type="array">
-						<item name="type" xsi:type="string">set_to_not_new</item>
-						<item name="label" xsi:type="string" translate="true">Set Product as Not New</item>
-						<item name="url" xsi:type="string">productnewmassactions/setnew/settonotnew</item>
-					</item>
-				</argument>
+				<argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">notnew</item>
+                        <item name="label" xsi:type="string" translate="true">Not New</item>
+                        <item name="url" xsi:type="url" path="productnewmassactions/product/SetNewStatus">
+                            <param name="newstatus">0</param>
+                        </item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">new</item>
+                        <item name="label" xsi:type="string" translate="true">New</item>
+                        <item name="url" xsi:type="url" path="productnewmassactions/product/SetNewStatus">
+                            <param name="newstatus">1</param>
+                        </item>
+                    </item>
+                </argument>
 			</action>
 		</massaction>
 	</listingToolbar>
