@@ -33,13 +33,23 @@ class SetNewStatus extends \Magento\Catalog\Controller\Adminhtml\Product {
      * @var RedirectFactory
      */
     protected $_resultRedirectFactory;
+    /**
+     * @param \Magento\Framework\Stdlib\DateTime\TimezoneInterface
+     */
+	protected $_timezone;
+	/**
+	* @param \Magento\Framework\Stdlib\DateTime\DateTime
+	*/
+	protected $_datetime;
+
      
     public function __construct(
         Context $_context,
         Builder $_productBuilder,
         Filter $_filter,
         CollectionFactory $_collectionFactory,
-        LoggerInterface $_loggerInterface
+        LoggerInterface $_loggerInterface,
+		\Magento\Framework\Stdlib\DateTime\TimezoneInterface $_timezone
     ) {
     	
         $this->_collectionFactory = $_collectionFactory;
@@ -48,6 +58,7 @@ class SetNewStatus extends \Magento\Catalog\Controller\Adminhtml\Product {
         $this->_context = $_context;
         $this->_messageManager = $this->_context->getMessageManager();
         $this->_resultRedirectFactory = $this->_context->getResultRedirectFactory();
+        $this->_timezone = $_timezone;
         parent::__construct( $this->_context, $_productBuilder );
     
     }
@@ -62,7 +73,8 @@ class SetNewStatus extends \Magento\Catalog\Controller\Adminhtml\Product {
 		
 		}
 		$storeId = (int) $this->getRequest()->getParam('store', 0);
-		$now = date( "Y-m-d h:i:s" );
+		$tz = new \DateTimeZone( $this->_timezone->getConfigTimezone() );
+        $now = new \DateTime( null, $tz );
 		$collection = $this->_filter->getCollection( $this->_collectionFactory->create() );
 		$collection->addAttributeToSelect( 'news_from_date' )->addAttributeToSelect( 'news_to_date' );
 		$productIds = $collection->getAllIds();
@@ -73,7 +85,7 @@ class SetNewStatus extends \Magento\Catalog\Controller\Adminhtml\Product {
 				// $this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
 				if( $newStatus ) {
 					
-					$this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_from_date' => $now], $storeId )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
+					$this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_from_date' => $now->format( "Y-m-d h:i:s" )], $storeId )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
 				
 				}
 				else {
