@@ -82,10 +82,9 @@ class SetNewStatus extends \Magento\Catalog\Controller\Adminhtml\Product {
 		
 			try {
 			
-				// $this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
 				if( $newStatus ) {
 					
-					$this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_from_date' => $now->format( "Y-m-d h:i:s" )], $storeId )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
+					$this->_objectManager->get( 'Magento\Catalog\Model\Product\Action' )->updateAttributes( $productIds, ['news_from_date' => $now->format( "Y-m-d H:i:s" )], $storeId )->updateAttributes( $productIds, ['news_to_date' => ''], $storeId );
 				
 				}
 				else {
